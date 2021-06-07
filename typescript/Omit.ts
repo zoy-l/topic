@@ -1,4 +1,3 @@
-
 import { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
@@ -23,9 +22,6 @@ interface Expected2 {
 
 /* _____________ 答案 _____________ */
 
-type Ex<T, K> = T extends K ? never : T
+type Exclude1<T, K> = T extends K ? never : T
 
-type MyOmit<T extends object, K> = {[key in Ex<keyof T, K>]: T[key]} 
-
-
-
+type MyOmit<T, K> = { [key in Exclude1<keyof T, K>]: T[key] }
