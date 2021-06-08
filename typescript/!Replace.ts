@@ -20,7 +20,7 @@
 import { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
-  Expect<Equal<Replace<'foobar', 'bar', 'foo'>, 'foofoo'>>,
+  Expect<Equal<Replace<'foobar', 'foo', 'bar'>, 'barbar'>>,
   Expect<Equal<Replace<'foobarbar', 'bar', 'foo'>, 'foofoobar'>>,
   Expect<Equal<Replace<'foobarbar', '', 'foo'>, 'foobarbar'>>,
   Expect<Equal<Replace<'', '', ''>, ''>>
@@ -37,5 +37,3 @@ type Replace<
   : S extends `${infer Pre}${From}${infer Suffix}`
   ? `${Pre}${To}${Suffix}`
   : S
-
-type A = Replace<'foobar', 'bar', 'foo'>
