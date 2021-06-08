@@ -96,16 +96,17 @@ type Nodes = NodeA | NodeB | NodeC
 type ReplacedNodes = ReplacedNodeA | ReplacedNodeB | ReplacedNodeC
 type NodesNoName = NoNameNodeA | NoNameNodeC | NodeB
 
-// type cases = [
-//   Expect<
-//     Equal<
-//       ReplaceKeys<Nodes, 'name' | 'flag', { name: number; flag: string }>,
-//       ReplacedNodes
-//     >
-//   >,
-//   Expect<Equal<ReplaceKeys<Nodes, 'name', { aa: number }>, NodesNoName>>
-// ]
+type cases = [
+  Expect<Equal<ReplaceKeys<Nodes, 'name' | 'flag', { name: number; flag: string }>, ReplacedNodes>>,
+  Expect<Equal<ReplaceKeys<Nodes, 'name', { aa: number }>, NodesNoName>>
+]
 
-// /* _____________ Your Code Here _____________ */
+/* _____________ Your Code Here _____________ */
 
-// type ReplaceKeys<U, T, Y> = any
+type ReplaceKeys<U, T, Y> = U extends { type: string }
+  ? {
+      [key in keyof U]: key extends T ? (key extends keyof Y ? Y[key] : never) : U[key]
+    }
+  : keyof U
+
+type A = ReplaceKeys<Nodes, 'name', { aa: number }>
