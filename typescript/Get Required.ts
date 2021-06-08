@@ -28,10 +28,6 @@ type cases = [
 
 /* _____________ 你的代码 _____________ */
 
-type GetRequired<T, S = keyof T> = S extends keyof T
-  ? { [key in S]: T[key] } extends { [key in S]?: T[key] }
-    ? never
-    : Omit<T, S>
-  : never
+type GetRequired<T> = 
 
 type A = GetRequired<{ foo: number; bar?: string }>
